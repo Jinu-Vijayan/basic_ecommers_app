@@ -1,0 +1,9 @@
+nav {
+    height: 8vh;
+    padding: 0.5rem 1rem;
+}
+
+.nav_home_icon {
+    height: 100%;
+    cursor: pointer;
+}
