@@ -1,9 +1,78 @@
+:root{
+    --nav_color : #ffffff
+}
+
 nav {
     height: 8vh;
     padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #000000;
+    color: var(--nav_color);
+    
 }
 
-.nav_home_icon {
+.nav_center{
+    width: 50%;
+}
+
+.nav_center>form{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     height: 100%;
+    width: 100%;
+    background-color: var(--nav_color);
+    border-radius: 0.625rem;
+}
+
+.nav_center>form>input{
+    height: 100%;
+    padding: 0.5rem 1rem;
+    width: 90%;
+    border: none;
+    outline: none;
+    border-radius: 0.625rem;
+}
+
+.search_icon>button{
+    height: 100%;
+    border: none;
+    padding: 0.5rem 1rem ;
+    background-color: var(--nav_color);
+    cursor: pointer;
+    border-radius: 0.625rem;
+}
+
+.search_icon>button>svg{
+    width: 10px;
+    height: 20px;
+    transform: scale(3);
+    color: #000000;
+}
+
+.nav_right{
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    height: 100%;
+    color: var(--nav_color);
+    text-decoration: none;
+}
+
+.nav_icons {
+    height: 100%;
+    cursor: pointer;
+    color: var(--nav_color);
+}
+
+.nav_button{
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.625rem;
+    border: none;
+    background-color: #3acd3a;
+    color: #000000;
     cursor: pointer;
 }

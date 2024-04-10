@@ -7,7 +7,12 @@ const AppTemplate = () => {
   return (
     <>
     <Navbar/>
-    <Outlet/>
+    <main style={{
+      width: "100%",
+      minHeight : "84vh"
+    }}>
+     <Outlet/>
+    </main>
     <Footer/>
     </>
   )

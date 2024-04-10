@@ -6,7 +6,10 @@ import { getFirestore } from "firebase/firestore";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 const apiKey = process.env.REACT_APP_FIREBASE_API_KEY;
-const authDomain = process.env.AIzaSyAV87iJlqNYvYrl_TMchYhQn6_fZIqrn3U
+const authDomain = process.env.REACT_APP_FIREBASE_AUTH_DOMAIN;
+const messagingSenderId = process.env.REACT_APP_FIREBASE_MESSSAGE_SENDER_ID;
+const appId = process.env.REACT_APP_FIREBASE_APP_ID;
+const measurementId = process.env.REACT_APP_FIREBASE_MEASURMENT_ID;
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -15,9 +18,9 @@ const firebaseConfig = {
   authDomain: authDomain,
   projectId: "authenticationpractice-9fc3b",
   storageBucket: "authenticationpractice-9fc3b.appspot.com",
-  messagingSenderId: "1052866085219",
-  appId: "1:1052866085219:web:119b1b013ad71d90439356",
-  measurementId: "G-28VZSL0X8Z"
+  messagingSenderId: messagingSenderId,
+  appId: appId,
+  measurementId: measurementId
 };
 
 // Initialize Firebase
@@ -27,5 +30,4 @@ const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
 export {db}
-
 export default app;

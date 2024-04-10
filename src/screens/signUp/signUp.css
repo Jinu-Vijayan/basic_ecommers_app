@@ -1,4 +1,4 @@
-.signin_container{
+.signup_container{
     width: 100%;
     height: 100vh;
     display: flex;
@@ -8,31 +8,25 @@
     gap: 1rem;
 }
 
-.signin_form{
+.signup_container>form{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 0.625rem;
     padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 0 3px 3px #c9c9c9;
-    background-color: #ffffff;
-}
-
-.signin_form p{
-    font-size: 2rem;
-    font-weight: bolder;
-}
-
-.signin_form input {
-    padding: 0.5rem 1rem ;
     border-radius: 0.625rem;
-    border: 1px solid #8d8d8d;
-    outline: none;
+    box-shadow: 0 0 2px 2px #b7b7b7;
 }
 
-.signin_form button{
+.signup_container>form>input{
+    padding: 0.5rem 1rem;
+    outline: none;
+    border-radius: 0.625rem;
+    border: 1px solid #c1c1c1;
+}
+
+.signup_container>form>button{
     padding: 0.5rem 1rem ;
     border-radius: 0.625rem;
     border: none;

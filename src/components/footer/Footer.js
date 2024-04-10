@@ -6,13 +6,15 @@ const Footer = () => {
 
   const location = useLocation();
 
-  const notAllowedPath = ['/signin']
+  const notAllowedPath = ['/signIn','/signUp']
 
   
   return (
     <>
     {notAllowedPath.includes(location.pathname)  ? null :
-      <footer>Footer</footer>
+      <footer className='footer_container'>
+        <p>No copy rights</p>
+      </footer>
      }
     </>
   )
