@@ -14,6 +14,9 @@ const Navbar = () => {
   const userSignedIn = useSelector((state) => state.user.userSignedIn);
   const allProductData = useSelector((state)=> state.product.allProductData);
 
+  const notAllowedPath = ['/signIn','/signUp'];
+  const searchBarNotAllowedPaths = ['/cart']
+
   function searchInputHandler(e){
     const searchTerm = e.target.value.toLowerCase();
     const filteredData = allProductData.filter((product)=>{
@@ -36,8 +39,6 @@ const Navbar = () => {
     });
   }
 
-  const notAllowedPath = ['/signIn','/signUp'];
-
   return (
     <>
     {notAllowedPath.includes(location.pathname) ? null :(
@@ -48,11 +49,15 @@ const Navbar = () => {
             <path d="m12 5.432 8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" />
           </svg>
         </NavLink>
-          <div className='nav_center'>
-            <form onClick={(e)=> e.preventDefault()}>
-              <input type='text' placeholder='Search...' onChange={searchInputHandler}/>
-            </form>
-          </div>
+          {
+            searchBarNotAllowedPaths.includes(location.pathname) ? null : (
+              <div className='nav_center'>
+                <form onClick={(e)=> e.preventDefault()}>
+                  <input type='text' placeholder='Search...' onChange={searchInputHandler}/>
+                </form>
+              </div>
+            )
+          }
         <div className='nav_right'>
           <NavLink to={'/cart'} className='nav_icons'>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className='nav_icons' >
