@@ -1,0 +1,52 @@
+.card_container{
+    width: 25%;
+    height: 80vh;
+    padding: 1rem;
+    box-shadow: 0 0 2px 2px #d5d5d5;
+    border-radius: 0.625rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card_container>img{
+    width: 100%;
+    height: 80%;
+    object-fit: fill;
+    border-radius: 0.625rem;
+}
+
+.card_container>div>p{
+    text-wrap: nowrap;
+    overflow: hidden;
+}
+
+.card_container>div>div{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0.625rem;
+}
+
+@media screen and (max-width:990.5px) {
+    .card_container{
+        width: 40%;
+    }
+}
+
+@media screen and (max-width:723.5px) {
+    .card_container{
+        width: 50%;
+    }
+}
+
+@media screen and (max-width:524.5px) {
+    .card_container{
+        width: 70%;
+    }
+}
+
+@media screen and (max-width:406.5px) {
+    .card_container{
+        width: 90%;
+    }
+}

@@ -5,8 +5,8 @@ import AppTemplate from './components/appTemplate/AppTemplate';
 import HomeScreen from './screens/homeScreen/HomeScreen'
 import SignIn from './screens/signIn/SignIn';
 import Cart from './screens/cart/Cart';
-import SearchResults from './screens/searchResults/SearchResults.js'
 import SignUp from './screens/signUp/SignUp.js'
+import ProductDetails from './screens/productDetails/ProductDetails.js';
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
           <Route path='signIn' element={<SignIn/>}/>
           <Route path='signUp' element= {<SignUp/>} />
           <Route path='cart' element = {<Cart/>} />
-          <Route path='search/:productName' element = {<SearchResults/>} />
+          <Route path='details/:productId' element = {<ProductDetails/>} />
         </Route>
       </Routes>
     </BrowserRouter>
