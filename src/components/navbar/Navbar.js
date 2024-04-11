@@ -10,14 +10,11 @@ import { setFilteredProductData } from '../../redux/slices/productSlice';
 // show pop up when user has singed out of the account
 const Navbar = () => {
   const location = useLocation();
-  const searchRef = useRef();
-  const [searchInput, setSearchInput] = useState("");
   const dispatch = useDispatch();
   const userSignedIn = useSelector((state) => state.user.userSignedIn);
   const allProductData = useSelector((state)=> state.product.allProductData);
 
   function searchInputHandler(e){
-    setSearchInput(e.target.value)
     const searchTerm = e.target.value.toLowerCase();
     const filteredData = allProductData.filter((product)=>{
       if(product?.title.toLowerCase().includes(searchTerm)){

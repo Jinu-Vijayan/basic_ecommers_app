@@ -1,18 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect} from 'react'
 import './homeScreen.css'
 import {useSelector, useDispatch} from 'react-redux'
-import {useNavigate} from 'react-router-dom'
 import fetchData from '../../utils/apiCall'
 import ProductCard from '../../components/productCard/ProductCard'
 import { setAllProductData, setFilteredProductData } from '../../redux/slices/productSlice'
 
 const HomeScreen = () => {
 
-  const inputRef = useRef();
-  const navigate = useNavigate();
-  const [productData, setProductData] = useState([]);
   const dispatch = useDispatch();
-  const allProductData = useSelector((state)=> state.product.allProductData);
   const filteredProductData = useSelector((state) => state.product.filteredProductData);
 
 
@@ -22,7 +17,6 @@ const HomeScreen = () => {
     // setProductData(res);
     dispatch(setAllProductData(res));
     dispatch(setFilteredProductData(res));
-    console.log(res)
   }
 
   useEffect(()=>{
