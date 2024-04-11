@@ -2,6 +2,10 @@ import React, { useRef } from 'react'
 import './signUp.css'
 import { NavLink, useNavigate } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore"; 
+import {useDispatch} from 'react-redux'
+import { setSignedInUserId } from '../../redux/slices/userSlice';
+import {db} from '../../firebase/app'
 
 
 //TODO
@@ -12,14 +16,20 @@ const SignUp = () => {
   // const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
+  const dispatch = useDispatch();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  async function createNewUserInDataBase(uid){
+    await setDoc(doc(db,"users",uid),{
+      cartData : []
+    })
+  }
 
   function signUpHandler(e){
 
     e.preventDefault()
 
-  
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     console.log(email, password)
@@ -34,7 +44,8 @@ const SignUp = () => {
       .then((userCredential) => {
         // Signed up 
         const user = userCredential.user;
-        console.log("user created",userCredential)
+        dispatch(setSignedInUserId(user.uid));
+        createNewUserInDataBase(user.uid);
         navigate('/signIn')
         // ...
       })

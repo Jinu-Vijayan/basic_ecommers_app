@@ -2,11 +2,20 @@ import './cartItemCard.css'
 import React, { useEffect } from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import { setProductsInCart } from '../../redux/slices/productSlice';
+import { doc, setDoc } from "firebase/firestore"; 
+import {db} from '../../firebase/app';
 
 const CartItemCard = ({productDetails,setSubTotal}) => {
 
     const dispatch = useDispatch();
     const productsInCart = useSelector((state)=>state.product.productsInCart)
+    const signedInUserId = useSelector((state)=> state.user.signedInUserId);
+
+    async function uploadDataToDb(newData){
+        await setDoc(doc(db,'users',signedInUserId),{
+            cartData : newData
+        })
+    }
 
     function deleteHandler(){
         let newData = [...productsInCart]
@@ -19,6 +28,7 @@ const CartItemCard = ({productDetails,setSubTotal}) => {
                 })
             }
         })
+        uploadDataToDb(newData);
         dispatch(setProductsInCart(newData))
     }
 

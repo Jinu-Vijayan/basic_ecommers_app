@@ -2,13 +2,22 @@ import './addToCartBtn.css'
 import React from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import { setProductsInCart } from '../../redux/slices/productSlice';
+import { doc, setDoc } from "firebase/firestore"; 
+import {db} from '../../firebase/app';
 // TODO
 // replace alerts with appropriate pop up messages
 const AddToCartBtn = ({productDetails}) => {
 
     const productsInCart = useSelector((state)=> state.product.productsInCart);
     const userSignedIn = useSelector((state)=>state.user.userSignedIn);
+    const signedInUserId = useSelector((state)=> state.user.signedInUserId);
     const dispatch = useDispatch()
+
+    async function uploadDataToDb(newData){
+        await setDoc(doc(db,'users',signedInUserId),{
+            cartData : newData
+        })
+    }
 
     function clickHandler(e){
 
@@ -34,6 +43,8 @@ const AddToCartBtn = ({productDetails}) => {
         }
 
         const newData = [...productsInCart, productDetails];
+
+        uploadDataToDb(newData);
         dispatch(setProductsInCart(newData));
 
         alert("Product added to cart")

@@ -3,7 +3,10 @@ import './signIn.css'
 import { NavLink,useNavigate  } from 'react-router-dom'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import {useSelector,useDispatch} from 'react-redux'
-import { setUserSignedIn } from '../../redux/slices/userSlice';
+import { setSignedInUserId, setUserSignedIn } from '../../redux/slices/userSlice';
+import { doc, getDoc } from "firebase/firestore";
+import { db } from '../../firebase/app';
+import { setProductsInCart } from '../../redux/slices/productSlice';
 
 const SignIn = () => {
 
@@ -14,9 +17,20 @@ const SignIn = () => {
   const userSignedIn = useSelector((state)=> state.user.userSignedIn);
   const dispatch = useDispatch()
 
-  useEffect(()=>{
-    console.log(userSignedIn)
-  },[userSignedIn])
+  async function getCartDataFromDb(uid){
+
+    const docRef = doc(db,"users",uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      // console.log("Document data:", docSnap.data().cartData);
+      dispatch(setProductsInCart(docSnap.data().cartData))
+    } else {
+      // docSnap.data() will be undefined in this case
+      console.error("No such document!");
+    }
+
+  }
 
   function signInHandler(e){
 
@@ -34,7 +48,9 @@ const SignIn = () => {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        // console.log(user)
+        // console.log("user data from fire base",user.uid)
+        getCartDataFromDb(user.uid);
+        dispatch(setSignedInUserId(user.uid));
         dispatch(setUserSignedIn(true));
         navigate('/')
         // ...

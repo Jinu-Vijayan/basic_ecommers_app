@@ -1,8 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit'
-// TODO
-// make sure the initial state of userSignedIn is false
+
 const initialState = {
-    userSignedIn : true
+    userSignedIn : false,
+    signedInUserId : ""
 }
 
 const userSlice = createSlice({
@@ -11,9 +11,12 @@ const userSlice = createSlice({
     reducers: {
         setUserSignedIn : (state, action) => {
             state.userSignedIn = action.payload;
+        },
+        setSignedInUserId : (state,action) => {
+            state.signedInUserId = action.payload
         }
     }
 })
 
-export const {setUserSignedIn} = userSlice.actions
+export const {setUserSignedIn, setSignedInUserId} = userSlice.actions;
 export default userSlice.reducer;

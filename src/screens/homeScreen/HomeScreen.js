@@ -9,6 +9,7 @@ const HomeScreen = () => {
 
   const dispatch = useDispatch();
   const filteredProductData = useSelector((state) => state.product.filteredProductData);
+  const signedInUserId = useSelector((state)=> state.user.signedInUserId)
 
 
   async function fetchAllData(){
@@ -21,6 +22,7 @@ const HomeScreen = () => {
 
   useEffect(()=>{
     fetchAllData();
+    // console.log(signedInUserId)
   },[])
   return (
     <div className='home_container'>

@@ -3,7 +3,7 @@ import './navbar.css'
 import {NavLink, useLocation} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import { getAuth, signOut } from "firebase/auth";
-import { setUserSignedIn } from '../../redux/slices/userSlice';
+import { setSignedInUserId, setUserSignedIn } from '../../redux/slices/userSlice';
 import { setFilteredProductData } from '../../redux/slices/productSlice';
 
 // TODO
@@ -32,7 +32,9 @@ const Navbar = () => {
   function signOutHandler(){
     const auth = getAuth();
     signOut(auth).then(() => {
+      // console.log("signed out")
       dispatch(setUserSignedIn(false));
+      dispatch(setSignedInUserId(""));
     }).catch((error) => {
       // An error happened.
       console.error(error)
