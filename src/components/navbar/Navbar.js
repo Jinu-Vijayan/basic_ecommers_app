@@ -4,18 +4,29 @@ import {NavLink, useLocation} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import { getAuth, signOut } from "firebase/auth";
 import { setUserSignedIn } from '../../redux/slices/userSlice';
+import { setFilteredProductData } from '../../redux/slices/productSlice';
 
 // TODO
 // show pop up when user has singed out of the account
 const Navbar = () => {
   const location = useLocation();
   const searchRef = useRef();
-  const [searchInput, setSearchInput] = useState("")
-  const userSignedIn = useSelector((state) => state.user.userSignedIn)
-  const dispatch = useDispatch()
+  const [searchInput, setSearchInput] = useState("");
+  const dispatch = useDispatch();
+  const userSignedIn = useSelector((state) => state.user.userSignedIn);
+  const allProductData = useSelector((state)=> state.product.allProductData);
 
   function searchInputHandler(e){
     setSearchInput(e.target.value)
+    const searchTerm = e.target.value.toLowerCase();
+    const filteredData = allProductData.filter((product)=>{
+      if(product?.title.toLowerCase().includes(searchTerm)){
+        return true;
+      }
+      return false;
+    });
+
+    dispatch(setFilteredProductData(filteredData));
   }
 
   function signOutHandler(){
@@ -43,14 +54,6 @@ const Navbar = () => {
           <div className='nav_center'>
             <form onClick={(e)=> e.preventDefault()}>
               <input type='text' placeholder='Search...' onChange={searchInputHandler}/>
-              {/* {console.log(searchRef.current?.value)} */}
-              <NavLink to={`/search/${searchInput}`} className="nav_icons search_icon">
-                <button>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                  </svg>
-                </button>
-              </NavLink>
             </form>
           </div>
         <div className='nav_right'>
