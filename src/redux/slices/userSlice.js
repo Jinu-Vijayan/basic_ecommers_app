@@ -1,7 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit'
-
+// TODO
+// make sure the initial state of userSignedIn is false
 const initialState = {
-    userSignedIn : false
+    userSignedIn : true
 }
 
 const userSlice = createSlice({

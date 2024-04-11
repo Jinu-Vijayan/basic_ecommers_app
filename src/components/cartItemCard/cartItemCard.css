@@ -1,0 +1,27 @@
+.cart_card_container{
+    width: 100%;
+    padding: 1rem;
+}
+
+.cart_card_top{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.cart_card_top_left{
+    width: 100%;
+}
+
+.cart_card_top_left>img{
+    width: 100px;
+}
+
+.delete_btn{
+    padding: 0.5rem 1rem;
+    background-color: #ff0000;
+    color: #ffffff;
+    border: none;
+    border-radius: 0.625rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}

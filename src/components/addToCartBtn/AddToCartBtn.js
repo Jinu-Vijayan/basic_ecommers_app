@@ -29,12 +29,14 @@ const AddToCartBtn = ({productDetails}) => {
         })
 
         if(productPresentInCart){
-            alert("Product already added in cart");
+            alert("Product already exists in cart");
             return;
         }
 
         const newData = [...productsInCart, productDetails];
         dispatch(setProductsInCart(newData));
+
+        alert("Product added to cart")
     }
 
   return (
