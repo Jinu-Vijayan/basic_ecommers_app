@@ -35,7 +35,7 @@ const Cart = () => {
                 }
               </div>
               <div>
-                <p className='cart_total'>Subtotal: ${subtotal}</p>
+                <p className='cart_total'>Subtotal {`(${productsInCart.length}) items`}: ${subtotal}</p>
               </div>
             </div>
           )
