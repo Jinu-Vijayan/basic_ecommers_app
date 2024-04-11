@@ -5,9 +5,9 @@ import {useSelector, useDispatch} from 'react-redux'
 import { getAuth, signOut } from "firebase/auth";
 import { setSignedInUserId, setUserSignedIn } from '../../redux/slices/userSlice';
 import { setFilteredProductData } from '../../redux/slices/productSlice';
+import toast, { Toaster } from 'react-hot-toast';
 
-// TODO
-// show pop up when user has singed out of the account
+
 const Navbar = () => {
   const location = useLocation();
   const dispatch = useDispatch();
@@ -33,6 +33,7 @@ const Navbar = () => {
     const auth = getAuth();
     signOut(auth).then(() => {
       // console.log("signed out")
+      toast.success("Signed Out")
       dispatch(setUserSignedIn(false));
       dispatch(setSignedInUserId(""));
     }).catch((error) => {
@@ -45,6 +46,7 @@ const Navbar = () => {
     <>
     {notAllowedPath.includes(location.pathname) ? null :(
       <nav>
+        <Toaster/>
         <NavLink to={'/'} className="nav_icons ">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className='nav_icons'>
             <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" />

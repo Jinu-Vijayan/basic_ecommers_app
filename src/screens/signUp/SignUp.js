@@ -10,7 +10,6 @@ import {db} from '../../firebase/app'
 
 //TODO
 // make functionality for users to add profile  name and other customizations
-// Show a pop up for error handling and to inform user of the error
 const SignUp = () => {
 
   // const nameRef = useRef();

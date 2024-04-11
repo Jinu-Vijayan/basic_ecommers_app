@@ -1,7 +1,12 @@
+.btn_container{
+    width: 100%;
+}
+
 .add_to_cart_btn{
     padding: 0.5rem 1rem;
     border-radius: 0.625rem;
     cursor: pointer;
     background-color: gold;
     color: black;
+    width: 100%;
 }

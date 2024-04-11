@@ -1,12 +1,13 @@
 import React, { useEffect, useRef } from 'react'
 import './signIn.css'
-import { NavLink,useNavigate  } from 'react-router-dom'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { db } from '../../firebase/app';
+import { setProductsInCart } from '../../redux/slices/productSlice';
+import { NavLink,useNavigate  } from 'react-router-dom'
 import {useSelector,useDispatch} from 'react-redux'
 import { setSignedInUserId, setUserSignedIn } from '../../redux/slices/userSlice';
 import { doc, getDoc } from "firebase/firestore";
-import { db } from '../../firebase/app';
-import { setProductsInCart } from '../../redux/slices/productSlice';
+import toast, { Toaster } from 'react-hot-toast';
 
 const SignIn = () => {
 
@@ -49,6 +50,7 @@ const SignIn = () => {
         // Signed in 
         const user = userCredential.user;
         // console.log("user data from fire base",user.uid)
+        toast.success("SignIn success")
         getCartDataFromDb(user.uid);
         dispatch(setSignedInUserId(user.uid));
         dispatch(setUserSignedIn(true));
@@ -58,12 +60,13 @@ const SignIn = () => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.error(errorMessage);
+        toast.error(errorMessage);
       });
   }
   
   return (
     <div className='signin_container'>
+      <Toaster/>
       <form className='signin_form' onClick={signInHandler}>
         <p>SignIn</p>
         <input ref={emailRef} type='email' placeholder='Enter email'/>

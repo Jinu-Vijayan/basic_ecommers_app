@@ -4,8 +4,8 @@ import {useSelector, useDispatch} from 'react-redux'
 import { setProductsInCart } from '../../redux/slices/productSlice';
 import { doc, setDoc } from "firebase/firestore"; 
 import {db} from '../../firebase/app';
-// TODO
-// replace alerts with appropriate pop up messages
+import toast, { Toaster } from 'react-hot-toast';
+
 const AddToCartBtn = ({productDetails}) => {
 
     const productsInCart = useSelector((state)=> state.product.productsInCart);
@@ -26,7 +26,7 @@ const AddToCartBtn = ({productDetails}) => {
         let productPresentInCart = false;
 
         if(!userSignedIn){
-            alert("Sign in to your accout in order to add items to cart");
+            toast.error("Sign in to your accout in order to add items to cart");
             return;
         }
 
@@ -38,7 +38,7 @@ const AddToCartBtn = ({productDetails}) => {
         })
 
         if(productPresentInCart){
-            alert("Product already exists in cart");
+            toast.error("Product already exists in cart");
             return;
         }
 
@@ -47,11 +47,14 @@ const AddToCartBtn = ({productDetails}) => {
         uploadDataToDb(newData);
         dispatch(setProductsInCart(newData));
 
-        alert("Product added to cart")
+        toast.success("Product added to cart")
     }
 
   return (
-    <button onClick={clickHandler}  className='add_to_cart_btn'>Add to cart</button>
+    <div className='btn_contanier'>
+        <Toaster/>
+        <button onClick={clickHandler}  className='add_to_cart_btn'>Add to cart</button>
+    </div>
   )
 }
 
