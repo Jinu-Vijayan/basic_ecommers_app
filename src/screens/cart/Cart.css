@@ -33,3 +33,19 @@
     border-top: 2px solid gray;
     padding-top: 1rem;
 }
+
+.razor_pay_btn_container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+}
+
+.razor_pay_btn_container>button{
+    padding: 0.5rem 1rem;
+    border-radius: 0.625rem;
+    background-color: #0000ff;
+    color: #ffffff;
+    cursor: pointer;
+}
