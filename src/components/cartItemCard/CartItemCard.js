@@ -36,7 +36,7 @@ const CartItemCard = ({productDetails,setSubTotal}) => {
             </div>
             <div className='cart_card_top_right'>
                 <p>{productDetails?.title}</p>
-                <p>Price : {productDetails?.price}</p>
+                <p>Price : ${productDetails?.price}</p>
             </div>
         </div>
         <div className='cart_card_bottom'>
