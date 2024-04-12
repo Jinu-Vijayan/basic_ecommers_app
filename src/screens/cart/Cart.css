@@ -4,6 +4,7 @@
     background-color: #343434;
     color: #ffffff;
     padding: 1rem;
+    position: relative;
 }
 
 .cart_message{

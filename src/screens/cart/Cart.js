@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {useSelector,useDispatch} from 'react-redux'
 import './Cart.css'
 import CartItemCard from '../../components/cartItemCard/CartItemCard';
@@ -6,16 +6,22 @@ import toast, { Toaster } from 'react-hot-toast';
 import { doc, setDoc } from "firebase/firestore"; 
 import {db} from '../../firebase/app';
 import { setProductsInCart } from '../../redux/slices/productSlice';
+import PaymentPopUp from '../../components/paymentPopUp/PaymentPopUp';
 
 // TODO
 // when clicking on proceed to pay button have a pop up that asks for name , address, and phone number on the client and pass that data on in the payment part
-// remove the items in cart after the payment is a success
+
 const Cart = () => {
+
   const userSignedIn = useSelector((state)=> state.user.userSignedIn);
   const productsInCart = useSelector((state)=> state.product.productsInCart);
   const signedInUserId = useSelector((state)=> state.user.signedInUserId);
   const dispatch = useDispatch()
   const [subtotal, setSubTotal] = useState(0);
+  const [openPaymentModal, setOpenPaymentModal] = useState(false);
+  const nameRef = useRef();
+  const addressRef = useRef();
+  const phoneNumberRef = useRef();
 
   async function uploadDataToDb(newData){
     await setDoc(doc(db,'users',signedInUserId),{
@@ -45,6 +51,17 @@ const Cart = () => {
     const priceInRs = subtotal * 83.33 * 100;
     console.log(typeof priceInRs)
 
+    const name = nameRef.current?.value;
+    const address = addressRef.current?.value;
+    const phoneNumber = phoneNumberRef.current?.value;
+
+    if(name === "" || address === "" || phoneNumber === ""){
+      toast.error("All fields are madatory");
+      return;
+    }
+
+    setOpenPaymentModal(false);
+
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
     );
@@ -71,9 +88,9 @@ const Cart = () => {
         uploadDataToDb([]);
       } ,
       "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
-          "name": "Gaurav Kumar", //your customer's name
-          "email": "gaurav.kumar@example.com",
-          "contact": "9000090000" //Provide the customer's phone number for better conversion rates 
+          "name": name, //your customer's name
+          "address": address,
+          "contact": phoneNumber //Provide the customer's phone number for better conversion rates 
       },
       "notes": {
           "address": "Razorpay Corporate Office"
@@ -86,6 +103,10 @@ const Cart = () => {
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
 
+  }
+
+  function paymentInitiationHandler(){
+    setOpenPaymentModal(true);
   }
 
 
@@ -120,8 +141,11 @@ const Cart = () => {
                 <p className='cart_total'>Subtotal {`(${productsInCart.length}) items`}: ${subtotal}</p>
               </div>
               <div className='razor_pay_btn_container'>
-                <button onClick={displayRazorPay}>Proceed to Payment</button>
+                <button onClick={paymentInitiationHandler}>Start Payment process</button>
               </div>
+              {
+                openPaymentModal === true ? <PaymentPopUp setOpenPaymentModal = {setOpenPaymentModal} nameRef={nameRef} addressRef = {addressRef} phoneNumberRef = {phoneNumberRef} displayRazorPay = {displayRazorPay} /> : null
+              }
             </div>
           )
         )
