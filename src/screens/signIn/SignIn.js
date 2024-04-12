@@ -70,7 +70,7 @@ const SignIn = () => {
       <form className='signin_form' onClick={signInHandler}>
         <p>SignIn</p>
         <input ref={emailRef} type='email' placeholder='Enter email'/>
-        <input ref={passwordRef} type='text' placeholder='Enter password'/>
+        <input ref={passwordRef} type='password' placeholder='Enter password'/>
         <button>SignIn</button>
       </form>
       <NavLink to={'/signUp'}>Create new account</NavLink>

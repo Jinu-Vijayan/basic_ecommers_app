@@ -62,7 +62,7 @@ const SignUp = () => {
       <form onClick={signUpHandler}>
         {/* <input ref={nameRef} type='text' placeholder='Enter user name'/> */}
         <input ref={emailRef} type='email' placeholder='Enter email'/>
-        <input ref={passwordRef} type='text' placeholder='Enter password'/>
+        <input ref={passwordRef} type='password' placeholder='Enter password'/>
         <button >SignUp</button>
       </form>
       <NavLink to={'/signIn'} >SignIn</NavLink>
