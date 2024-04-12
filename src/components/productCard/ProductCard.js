@@ -17,7 +17,7 @@ const ProductCard = ({productDetails}) => {
         <div>
             <p>{productDetails?.title}</p>
             <div>
-                <p>Price : ${productDetails?.price}</p>
+                <p>Price : {(productDetails?.price * 83.33).toFixed(2)} Rs</p>
                 <p>Rating : {productDetails?.rating?.rate}</p>
             </div>
         </div>

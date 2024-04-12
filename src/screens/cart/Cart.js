@@ -138,7 +138,7 @@ const Cart = () => {
                 }
               </div>
               <div>
-                <p className='cart_total'>Subtotal {`(${productsInCart.length}) items`}: ${subtotal}</p>
+                <p className='cart_total'>Subtotal {`(${productsInCart.length}) items`}: {(subtotal * 83.33).toFixed(2)} Rs</p>
               </div>
               <div className='razor_pay_btn_container'>
                 <button onClick={paymentInitiationHandler}>Start Payment process</button>

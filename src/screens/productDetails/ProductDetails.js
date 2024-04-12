@@ -27,7 +27,7 @@ const ProductDetails = () => {
         <p className='product_title'>{productDetails?.title}</p>
         <p className='product_description'>Description : {productDetails?.description}</p>
         <p className='product_rating'>Rating : {productDetails?.rating?.rate}</p>
-        <p className='product_price'>Price : ${productDetails?.price}</p>
+        <p className='product_price'>Price : {(productDetails?.price * 83.33).toFixed(2)}Rs</p>
         <AddToCartBtn productDetails={productDetails} />
       </div>
     </div>
