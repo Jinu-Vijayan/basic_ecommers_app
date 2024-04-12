@@ -1,70 +1,118 @@
-# Getting Started with Create React App
+# Basic Ecommerce Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Installation
 
-## Available Scripts
+### Step 1
 
-In the project directory, you can run:
+Run the below code in the terminal
+```shell
+npm i
+```
 
-### `npm start`
+### Step 2
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Make a **.env** file in the project folder.
+<br>
+Inside the **.env** file you need to create the following 
+<br>
+REACT_APP_FIREBASE_API_KEY = *Put your firebase api key here*
+<br>
+REACT_APP_FIREBASE_AUTH_DOMAIN = *Put your firebase auth domain here*
+<br>
+REACT_APP_FIREBASE_MESSSAGE_SENDER_ID = *Put your firebase message sender id here*
+<br>
+REACT_APP_FIREBASE_APP_ID = *Put your firebase app id here*
+<br>
+REACT_APP_FIREBASE_MEASURMENT_ID = *Put your firebase measurement id here*
+<br>
+REACT_APP_RAZOR_PAY_ID = *Put your razor pay test id here*
+<br>
+REACT_APP_RAZOR_PAY_SECRET_KEY = *Put your razor secret key here*
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Click [here](https://firebase.google.com/?hl=en&authuser=0) to go reach **Firebase** 
+<br>
+Click [here](https://razorpay.com/) to go reach **Razor pay**
 
-### `npm test`
+## Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Core Technologies
+- HTML/CSS
+- JS/ES6
+- Node/npm
+- React
 
-### `npm run build`
+### Frontend libraries and tools
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Redux Toolkit
+- React Router DOM
+- Axios
+- Firebase
+- React Hot Toast
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Pages
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Home Page
 
-### `npm run eject`
+![image of the home page](./assets/images/screenshots/homepage.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The home page is where you will first visit when going to the app. From here you can search for among the products that are available at the time in the store.
+<br>
+If one clicks on top of any of the products the site will open a new page containing the details of the product you have clicked on.
+<br>
+The **Add to cart** button will let a user add the particular item to there cart.When you add an item to the cart that doesnt already exist in the cart then a toast will inform you of that the items has been added to the cart. If you click on the button after adding the item to cart already then a toast message will let you know that the item already exist in the cart.
+<br>
+You can singIn to your account by clicking on the SignIn button. Once you have signedIn the button will change to a the SignOut button, that will let you signout of your acount.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Product Details Page
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![image of the product details page](./assets/images/screenshots/productDetailsPage.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+This page shows the details of the products.The add to cart button in this page does the same functions as the one you see on the home screen.
 
-## Learn More
+### Cart Page
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This is the page that will show all the items that you are interested in buying at the time.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Cart page when not signedIn to any account
+![image of cart page when not signed in to any account](./assets/images/screenshots/cartPageNotSignedIn.png)
 
-### Code Splitting
+This will be how the UI looks when a user has yet to sign in to an account
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+#### Cart page when signedIn with no items added to cart
 
-### Analyzing the Bundle Size
+![image of cart page when signed in but have nothing added to the cart](./assets/images/screenshots/cartPageSingedInWithNoProductsAdded.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+This will be the UI when the user has signed in but has yet to add any item to the cart.
 
-### Making a Progressive Web App
+#### Cart page when signedIn with items added to cart
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+![image of cart page when signed in with items added to the cart](./assets/images/screenshots/cartPageSingedInWithProductsAdded.png)
 
-### Advanced Configuration
+This will be the UI when a user has added some items to the cart.
+<br>
+In the cart the items added will be shown as cards. Each card can be deleted and the curresponding item will be removed from your cart
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+#### Cart page when the start payment process button is pressed
 
-### Deployment
+![image of cart page when the start payment process button is pressed](./assets/images/screenshots/cartPagePaymentInitialted.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+This modal window will open when you click on the start payment process button in the cart page. This window is used to get information that will be used in the payment process.All the fields are necessary in this modal window if anyone presses the Proceed to payment button without filling any of the fields a toast will inform them that all the fields are required to proceed to next step of payment.
 
-### `npm run build` fails to minify
+#### Cart page when proceed to payment button is pressed
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![image of cart page when the start proceed to payment button is pressed](./assets/images/screenshots/cartPageProceedToPayment.png)
+
+The Razor pay integartion page that is being run on the test mode.From here you can do the rest of the things required for the payment
+
+### SignIn page
+
+![image of signIn page](./assets/images/screenshots/signInpage.png)
+
+This is the signIn page where users can login to their accounts. Once you have signedIn successfully the app will redirect you to the home page of the site
+
+### SignUp page
+
+![image of signup page](./assets/images/screenshots/signUppage.png)
+
+This is the signUp page from where users can create accounts to login to the app. Once you have successfully created an acount you will be redirected to the signIn page so that you can singIn to your acount.
+
