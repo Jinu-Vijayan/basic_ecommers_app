@@ -6,6 +6,7 @@ import { doc, setDoc } from "firebase/firestore";
 import {useDispatch} from 'react-redux'
 import { setSignedInUserId } from '../../redux/slices/userSlice';
 import {db} from '../../firebase/app'
+import toast, { Toaster } from 'react-hot-toast';
 
 
 //TODO
@@ -45,13 +46,15 @@ const SignUp = () => {
         const user = userCredential.user;
         dispatch(setSignedInUserId(user.uid));
         createNewUserInDataBase(user.uid);
+        toast.success("SignUp Complete");
         navigate('/signIn')
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorMessage)
+        console.error(errorMessage);
+        toast.error(errorMessage);
         // ..
       });
   }
@@ -59,6 +62,7 @@ const SignUp = () => {
 
   return (
     <div className='signup_container'>
+      <Toaster/>
       <form onClick={signUpHandler}>
         {/* <input ref={nameRef} type='text' placeholder='Enter user name'/> */}
         <input ref={emailRef} type='email' placeholder='Enter email'/>
