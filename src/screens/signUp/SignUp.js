@@ -7,16 +7,7 @@ import {useDispatch} from 'react-redux'
 import { setSignedInUserId } from '../../redux/slices/userSlice';
 import {db} from '../../firebase/app'
 import toast, { Toaster } from 'react-hot-toast';
-import BeatLoader from "react-spinners/BeatLoader";
-
-const override = {
-  display: "block",
-  margin: "0 auto",
-  borderColor: "red",
-  position: "absolute",
-  top: "10%",
-  // backgroundColor: "black"
-};
+import LoadingAnimation from '../../components/loadingAnimation/LoadingAnimation';
 
 //TODO
 // make functionality for users to add profile  name and other customizations
@@ -86,15 +77,7 @@ const SignUp = () => {
         <button onClick={signUpHandler} >SignUp</button>
       </form>
       <NavLink to={'/signIn'} >SignIn</NavLink>
-      <BeatLoader
-        color={color}
-        loading={loading}
-        cssOverride={override}
-        size={25}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-        speedMultiplier = "1"
-      />
+      <LoadingAnimation loading={loading}/>
     </div>
   )
 }
