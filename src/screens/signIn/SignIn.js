@@ -1,15 +1,18 @@
-import React, { useEffect, useRef } from 'react'
-import './signIn.css'
+import React, { useEffect, useRef, useState } from 'react'
+import {useSelector,useDispatch} from 'react-redux'
+import toast, { Toaster } from 'react-hot-toast';
+import { NavLink,useNavigate  } from 'react-router-dom'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import './signIn.css'
 import { db } from '../../firebase/app';
 import { setProductsInCart } from '../../redux/slices/productSlice';
-import { NavLink,useNavigate  } from 'react-router-dom'
-import {useSelector,useDispatch} from 'react-redux'
 import { setSignedInUserId, setUserSignedIn } from '../../redux/slices/userSlice';
-import { doc, getDoc } from "firebase/firestore";
-import toast, { Toaster } from 'react-hot-toast';
+import LoadingAnimation from '../../components/loadingAnimation/LoadingAnimation';
 
 const SignIn = () => {
+
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate ()
   const emailRef = useRef()
@@ -44,6 +47,8 @@ const SignIn = () => {
       return;
     }
 
+    setLoading(true);
+
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -54,12 +59,14 @@ const SignIn = () => {
         getCartDataFromDb(user.uid);
         dispatch(setSignedInUserId(user.uid));
         dispatch(setUserSignedIn(true));
+        setLoading(false);
         navigate('/')
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        setLoading(false);
         toast.error(errorMessage);
       });
   }
@@ -67,13 +74,14 @@ const SignIn = () => {
   return (
     <div className='signin_container'>
       <Toaster/>
-      <form className='signin_form' onClick={signInHandler}>
+      <form className='signin_form' >
         <p>SignIn</p>
         <input ref={emailRef} type='email' placeholder='Enter email'/>
         <input ref={passwordRef} type='password' placeholder='Enter password'/>
-        <button>SignIn</button>
+        <button onClick={signInHandler}>SignIn</button>
       </form>
       <NavLink to={'/signUp'}>Create new account</NavLink>
+      <LoadingAnimation loading={loading}/>
     </div>
   )
 }
