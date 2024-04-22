@@ -14,7 +14,6 @@ import LoadingAnimation from '../../components/loadingAnimation/LoadingAnimation
 const SignUp = () => {
 
   const [loading, setLoading] = useState(false);
-  const [color, setColor] = useState("#36d7b7");
 
   // const nameRef = useRef();
   const emailRef = useRef();
