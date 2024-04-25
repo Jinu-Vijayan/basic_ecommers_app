@@ -1,5 +1,5 @@
 import './addToCartBtn.css'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import { setProductsInCart } from '../../redux/slices/productSlice';
 import { doc, setDoc } from "firebase/firestore"; 
@@ -8,10 +8,23 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const AddToCartBtn = ({productDetails}) => {
 
+    const [IsProductPresentInCart, setIsProductPresentInCart] = useState(false);
+
     const productsInCart = useSelector((state)=> state.product.productsInCart);
     const userSignedIn = useSelector((state)=>state.user.userSignedIn);
     const signedInUserId = useSelector((state)=> state.user.signedInUserId);
+
     const dispatch = useDispatch()
+
+    useEffect(()=>{
+        productsInCart.length > 0 && (
+            productsInCart.forEach((elem)=>{
+                if(elem.id === productDetails.id){
+                    setIsProductPresentInCart(true);
+                }
+            })
+        )
+    },[productsInCart,productDetails])
 
     async function uploadDataToDb(newData){
         await setDoc(doc(db,'users',signedInUserId),{
@@ -23,22 +36,8 @@ const AddToCartBtn = ({productDetails}) => {
 
         e.stopPropagation()
 
-        let productPresentInCart = false;
-
         if(!userSignedIn){
             toast.error("Sign in to your accout in order to add items to cart");
-            return;
-        }
-
-        productsInCart.forEach((elem)=>{
-            if(elem.id === productDetails.id){
-                productPresentInCart = true;
-                return;
-            }
-        })
-
-        if(productPresentInCart){
-            toast.error("Product already exists in cart");
             return;
         }
 
@@ -53,7 +52,14 @@ const AddToCartBtn = ({productDetails}) => {
   return (
     <div className='btn_contanier'>
         <Toaster/>
-        <button onClick={clickHandler}  className='add_to_cart_btn'>Add to cart</button>
+        {
+            !IsProductPresentInCart ? (
+                <button onClick={clickHandler}  className='add_to_cart_btn'>Add to cart</button>
+            ) : (
+                <button className='add_to_cart_btn disabled_btn' disabled={true}>Item In Cart</button>
+            )
+        }
+        
     </div>
   )
 }
