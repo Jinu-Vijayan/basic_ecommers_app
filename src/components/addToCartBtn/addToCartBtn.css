@@ -6,7 +6,12 @@
     padding: 0.5rem 1rem;
     border-radius: 0.625rem;
     cursor: pointer;
-    background-color: gold;
+    background-color: #ffd700;
     color: black;
     width: 100%;
+}
+
+.disabled_btn{
+    cursor:not-allowed !important;
+    background-color : #daa520 !important;
 }
