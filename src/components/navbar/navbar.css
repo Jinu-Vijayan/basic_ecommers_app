@@ -69,10 +69,11 @@ nav {
 
 .nav_button{
     text-decoration: none;
+    font-weight: 600;
     padding: 0.5rem 1rem;
     border-radius: 0.625rem;
     border: none;
-    background-color: #3acd3a;
+    background-color: #ffd814;
     color: #000000;
     cursor: pointer;
 }
