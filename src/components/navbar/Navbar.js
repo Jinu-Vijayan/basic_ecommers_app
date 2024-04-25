@@ -4,7 +4,7 @@ import {NavLink, useLocation} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import { getAuth, signOut } from "firebase/auth";
 import { setSignedInUserId, setUserSignedIn } from '../../redux/slices/userSlice';
-import { setFilteredProductData } from '../../redux/slices/productSlice';
+import { setFilteredProductData, setProductsInCart } from '../../redux/slices/productSlice';
 import toast, { Toaster } from 'react-hot-toast';
 
 
@@ -36,6 +36,7 @@ const Navbar = () => {
       toast.success("Signed Out")
       dispatch(setUserSignedIn(false));
       dispatch(setSignedInUserId(""));
+      dispatch(setProductsInCart([]));
     }).catch((error) => {
       // An error happened.
       console.error(error)

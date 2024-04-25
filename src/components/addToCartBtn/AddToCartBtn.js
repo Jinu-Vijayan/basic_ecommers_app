@@ -24,6 +24,7 @@ const AddToCartBtn = ({productDetails}) => {
                 }
             })
         )
+        return () => setIsProductPresentInCart(false);
     },[productsInCart,productDetails])
 
     async function uploadDataToDb(newData){
